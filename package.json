@@ -5,13 +5,30 @@
   "license": "MIT",
   "files": [
     "dist",
-    "src",
-    "fonts"
+    "scss",
+    "assets"
   ],
-  "style": "dist/theme-vars.css",
+  "style": "dist/bootstrap-meko.css",
   "scripts": {
-    "build": "sass --load-path=./node_modules src/meko_theme.scss dist/bootstrap-meko.css --no-source-map && postcss dist/bootstrap-meko.css -o dist/bootstrap-meko.min.css && mkdir -p public && cp dist/bootstrap-meko.min.css public/bootstrap-meko.min.css",
-    "watch": "sass --load-path=./node_modules --watch src/meko_theme.scss dist/bootstrap-meko.css --no-source-map"
+    "clean": "rm -rf dist && mkdir -p dist/fonts",
+    "css:compile": "sass --load-path=./node_modules scss/meko_theme.scss dist/bootstrap-meko.css --no-source-map --quiet-deps",
+    "css:minify": "postcss dist/bootstrap-meko.css -o dist/bootstrap-meko.min.css",
+    "fonts:hash": "hashmark assets/fonts/*.woff2 'dist/fonts/{name}.{hash}{ext}' --length=8",
+    "fonts:update": "sed -i 's|../assets/fonts/|fonts/|g' dist/*.css",
+    "css:hash": "hashmark dist/bootstrap-meko.css 'dist/{name}.{hash}{ext}' --length=8 && hashmark dist/bootstrap-meko.min.css 'dist/{name}.{hash}{ext}' --length=8",
+    "cdn:clean": "rm dist/bootstrap-meko.css dist/bootstrap-meko.min.css",
+    "build": "run-s clean css:compile fonts:hash fonts:update css:minify css:hash",
+    "build:cdn": "npm run build && npm run cdn:clean && npm run cdn:prepare",
+    "cdn:prepare": "echo 'CDN files ready in dist/ - upload to S3 with: aws s3 sync dist/ s3://your-bucket/meko-theme/ --cache-control \"max-age=31536000, public\"' && echo 'Available files:' && ls -la dist/",
+    "dev": "npm run build && live-server . --port=3000 --open=/demo/index.html",
+    "dev:watch": "npm run build && run-p watch:css serve",
+    "watch:css": "sass --load-path=./node_modules --watch scss/meko_theme.scss:dist/bootstrap-meko.css --no-source-map --quiet-deps",
+    "serve": "live-server . --port=3000 --open=/demo/index.html",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "check": "biome check ."
   },
   "browserslist": [
     "last 2 versions",
@@ -21,10 +38,16 @@
     "bootstrap": "^5.3.8"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.2",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.1",
+    "hashmark": "^5.0.0",
+    "live-server": "^1.2.2",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.5.6",
     "postcss-cli": "^11.0.1",
-    "sass": "^1.77.0"
+    "sass": "^1.77.0",
+    "sass-embedded": "^1.92.0",
+    "sass-loader": "^16.0.5"
   }
 }
