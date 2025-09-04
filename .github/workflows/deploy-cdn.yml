@@ -1,0 +1,51 @@
+name: Deploy to DigitalOcean Spaces CDN
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build for CDN
+      run: npm run build:cdn
+      
+    - name: Configure AWS CLI for DigitalOcean Spaces
+      env:
+        AWS_ACCESS_KEY_ID: ${{ vars.DO_SPACES_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.DO_SPACES_SECRET }}
+        AWS_DEFAULT_REGION: ${{ vars.DO_SPACES_REGION }}
+      run: echo "AWS CLI configured via environment variables"
+        
+    - name: Deploy to DigitalOcean Spaces
+      env:
+        AWS_ACCESS_KEY_ID: ${{ vars.DO_SPACES_KEY }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.DO_SPACES_SECRET }}
+        AWS_DEFAULT_REGION: ${{ vars.DO_SPACES_REGION }}
+      run: |
+        aws s3 sync dist/ s3://${{ vars.DO_SPACES_BUCKET }}/meko-bootstrap-theme/ \
+          --endpoint-url=https://${{ vars.DO_SPACES_REGION }}.digitaloceanspaces.com \
+          --cache-control "max-age=31536000, public" \
+          --delete \
+          --acl public-read
+          
+    - name: Show deployment info
+      run: |
+        echo "CDN deployed successfully!"
+        echo "Theme available at: https://${{ vars.DO_SPACES_BUCKET }}.${{ vars.DO_SPACES_REGION }}.digitaloceanspaces.com/meko-bootstrap-theme/"
+        echo "Minified CSS: https://${{ vars.DO_SPACES_BUCKET }}.${{ vars.DO_SPACES_REGION }}.digitaloceanspaces.com/meko-bootstrap-theme/bootstrap-meko.min.*.css"
