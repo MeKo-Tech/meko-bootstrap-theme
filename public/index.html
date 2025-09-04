@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <title>Bootstrap Full Build Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./bootstrap-meko.min.css" />
+  </head>
+  <body class="p-4">
+    <h1 class="mb-3">Hello MeKo</h1>
+    <p>
+      Wenn die Schrift <em>Open Sans</em> aktiv ist und Primary-Buttons in
+      <strong>#00afaa</strong> erscheinen, passt alles.
+    </p>
+    <button class="btn btn-primary">Primary</button>
+    <button class="btn btn-secondary">Secondary</button>
+    <br />
+    <br />
+    <br />
+    <button
+      id="themeToggle"
+      class="btn btn-outline-secondary btn-sm"
+      type="button"
+      aria-label="Dark Mode umschalten"
+    >
+      🌙 Dark
+    </button>
+    <br />
+    <br />
+    <br />
+
+    <div class="card" style="width: 18rem">
+      <div class="card-body">
+        <h5 class="card-title">Test Card</h5>
+        <p class="card-text">Card zum testen der Dark Mode Ansicht</p>
+        <a href="#" class="btn btn-primary">Button 1</a>
+        <a href="#" class="btn btn-secondary">Button 2</a>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        const STORAGE_KEY = "theme";
+        const root = document.documentElement;
+
+        function applyTheme(theme) {
+          root.setAttribute("data-bs-theme", theme);
+          const btn = document.getElementById("themeToggle");
+          if (btn) btn.textContent = theme === "dark" ? "☀️ Light" : "🌙 Dark";
+        }
+
+        // Initial: user choice > system preference > light
+        const stored = localStorage.getItem(STORAGE_KEY);
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        applyTheme(stored || (prefersDark ? "dark" : "light"));
+
+        // Toggle
+        document.getElementById("themeToggle").addEventListener("click", () => {
+          const current =
+            root.getAttribute("data-bs-theme") === "dark" ? "light" : "dark";
+          localStorage.setItem(STORAGE_KEY, current);
+          applyTheme(current);
+        });
+
+        // Reagieren auf Systemwechsel (optional)
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            if (!localStorage.getItem(STORAGE_KEY)) {
+              applyTheme(e.matches ? "dark" : "light");
+            }
+          });
+      })();
+    </script>
+  </body>
+</html>

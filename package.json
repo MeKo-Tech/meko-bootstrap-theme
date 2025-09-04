@@ -1,0 +1,30 @@
+{
+  "name": "@meko/bootstrap-theme",
+  "version": "1.0.0",
+  "description": "MeKo Bootstrap 5 theme (Primary #00afaa, Open Sans). Variant A (full build) & Variant B (variables-only).",
+  "license": "MIT",
+  "files": [
+    "dist",
+    "src",
+    "fonts"
+  ],
+  "style": "dist/theme-vars.css",
+  "scripts": {
+    "build": "sass --load-path=./node_modules src/meko_theme.scss dist/bootstrap-meko.css --no-source-map && postcss dist/bootstrap-meko.css -o dist/bootstrap-meko.min.css && mkdir -p public && cp dist/bootstrap-meko.min.css public/bootstrap-meko.min.css",
+    "watch": "sass --load-path=./node_modules --watch src/meko_theme.scss dist/bootstrap-meko.css --no-source-map"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "not dead"
+  ],
+  "dependencies": {
+    "bootstrap": "^5.3.8"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.1.1",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "sass": "^1.77.0"
+  }
+}
