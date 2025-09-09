@@ -42,7 +42,7 @@ $link-color: $primary;
 /* === Dark Theme ========================================================= */
 :root[data-bs-theme="dark"] {
   /* Grundflächen & Text */
-  --bs-body-bg: #0d1117; /* Page-Background */
+  --bs-body-bg: #232325; /* Page-Background */
   --bs-body-color: #e6e9ee; /* Standard-Text */
   --bs-heading-color: #ffffff; /* Überschriften */
   --bs-border-color: #30363d; /* zarte Rahmenlinien */
@@ -52,8 +52,8 @@ $link-color: $primary;
   --bs-tertiary-bg: #161b22; /* Panel-1 (Karten / Sektionen) */
 
   /* Marke/Akzent */
-  --bs-primary: #00b8b3; /* leicht aufgehelltes Teal für Dark */
-  --bs-primary-rgb: 0, 184, 179;
+  --bs-primary: #00807c; /* leicht aufgehelltes Teal für Dark */
+  --bs-primary-rgb: 0, 0, 0;
   --bs-link-color: var(--bs-primary);
   --bs-link-hover-color: color-mix(in oklab, var(--bs-primary), white 18%);
 
@@ -75,8 +75,8 @@ $link-color: $primary;
 /* Buttons – Weißer Text & dunklere Teal-Stufen wie im Screenshot */
 :root[data-bs-theme="dark"] .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #00807c;
-  --bs-btn-border-color: #00807c;
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
 
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #006d6a;
@@ -128,4 +128,9 @@ $link-color: $primary;
 :root[data-bs-theme="dark"] {
   --bs-secondary-color: #a7b0bb; /* Fließtext-dunkler */
   --bs-tertiary-color: #7f8a96; /* noch dezenter */
+}
+
+/* Navbar */
+:root[data-bs-theme="dark"] .navbar {
+  background-color: var(--bs-primary) !important;
 }
