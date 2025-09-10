@@ -12,7 +12,7 @@ A custom Bootstrap 5 theme featuring MeKo branding with primary color `#00afaa` 
 
 ## Quick Start
 
-### CDN Usage
+### CDN Usage (Preferred)
 
 ```html
 <!-- Production (minified) -->
@@ -21,6 +21,17 @@ A custom Bootstrap 5 theme featuring MeKo branding with primary color `#00afaa` 
 <!-- Development -->
 <link href="https://[bucket].[region].digitaloceanspaces.com/meko-bootstrap-theme/bootstrap-meko.[hash].css" rel="stylesheet">
 ```
+
+### GitHub Releases (Alternative)
+
+**Note**: While GitHub releases are available, the CDN approach above is preferred for production use due to optimized caching and global distribution.
+
+```html
+<!-- From GitHub Releases -->
+<link href="https://github.com/MeKo-Tech/meko-bootstrap-theme/releases/download/v1.0.1/bootstrap-meko.min.css" rel="stylesheet">
+```
+
+You can download assets from the [releases page](https://github.com/MeKo-Tech/meko-bootstrap-theme/releases) or reference them directly via URL.
 
 ### Theme Toggle
 
@@ -55,6 +66,22 @@ npm run dev:watch
 # Build for CDN (hashed assets)
 npm run build:cdn
 ```
+
+## Releases
+
+New versions are automatically released when tags are pushed:
+
+```bash
+# Create new version and push tag
+npm version patch  # or minor/major
+git push origin --tags
+```
+
+This triggers the release workflow which:
+- Builds minified CSS files
+- Creates GitHub release with assets
+- Uploads both `.tar.gz` and `.zip` distributions
+- Makes individual CSS files available for direct download
 
 ## Deployment
 
