@@ -1,172 +1,239 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MeKo Bootstrap Theme Demo</title>
-    <link href="../dist/bootstrap-meko.css" rel="stylesheet">
+    <link href="../dist/bootstrap-meko.css" rel="stylesheet" />
     <style>
-        .theme-showcase { margin-top: 2rem; }
-        .color-box {
-            height: 60px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin-bottom: 1rem;
-        }
-        .bg-primary-demo { background-color: var(--bs-primary); }
-        .bg-secondary-demo { background-color: var(--bs-secondary); }
+      .theme-showcase {
+        margin-top: 2rem;
+      }
+      .color-box {
+        height: 60px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+      .bg-primary-demo {
+        background-color: var(--bs-primary);
+      }
+      .bg-secondary-demo {
+        background-color: var(--bs-secondary);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        <div class="container">
-            <a class="navbar-brand" href="#">MeKo Theme</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                </ul>
-            </div>
+      <div class="container">
+        <a class="navbar-brand" href="#">MeKo Theme</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Features</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">About</a></li>
+          </ul>
         </div>
+      </div>
     </nav>
 
     <main class="container my-5">
+      <div class="row">
+        <div class="col-12">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="display-4">MeKo Bootstrap Theme</h1>
+            <button class="btn btn-outline-secondary" onclick="toggleTheme()">
+              <span id="theme-icon">🌙</span> Toggle Theme
+            </button>
+          </div>
+
+          <!-- LEAD-TEXT mit data-Attributen -->
+          <p
+            class="lead"
+            data-text-light="A custom Bootstrap 5 theme featuring MeKo branding with primary color #00AAA7 and Open Sans typography."
+            data-text-dark="Dark mode active — MeKo theme with primary color #00807C and Open Sans typography."
+          >
+            A custom Bootstrap 5 theme featuring MeKo branding with primary
+            color #00aaa7 and Open Sans typography.
+          </p>
+        </div>
+      </div>
+
+      <div class="theme-showcase">
         <div class="row">
-            <div class="col-12">
-                <div class="d-flex justify-content-between align-items-center mb-4">
-                    <h1 class="display-4">MeKo Bootstrap Theme</h1>
-                    <button class="btn btn-outline-secondary" onclick="toggleTheme()">
-                        <span id="theme-icon">🌙</span> Toggle Theme
-                    </button>
-                </div>
-                <p class="lead">A custom Bootstrap 5 theme featuring MeKo branding with primary color #00afaa and Open Sans typography.</p>
-            </div>
-        </div>
+          <div class="col-md-6">
+            <h3>Color Palette</h3>
 
-        <div class="theme-showcase">
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>Color Palette</h3>
-                    <div class="color-box bg-primary-demo">Primary: #00afaa</div>
-                    <div class="color-box bg-secondary-demo">Secondary: #595959</div>
-                </div>
-                <div class="col-md-6">
-                    <h3>Typography</h3>
-                    <h1>Heading 1 (Open Sans)</h1>
-                    <h2>Heading 2 (Open Sans)</h2>
-                    <p>This is a paragraph using the Open Sans font family. The custom theme ensures consistent typography across all elements.</p>
-                    <p><strong>Bold text</strong> and <em>italic text</em> maintain the Open Sans styling.</p>
-                </div>
+            <!-- FARBBOXEN mit data-Attributen -->
+            <div
+              class="color-box bg-primary-demo"
+              data-text-light="Primary: #00AAA7"
+              data-text-dark="Primary (Dark): #00807C"
+            >
+              Primary: #00aaa7
             </div>
-        </div>
 
-        <div class="row mt-5">
-            <div class="col-12">
-                <h3>Buttons</h3>
-                <button type="button" class="btn btn-primary me-2">Primary Button</button>
-                <button type="button" class="btn btn-outline-primary me-2">Outline Primary</button>
-                <button type="button" class="btn btn-secondary me-2">Secondary</button>
-                <button type="button" class="btn btn-success me-2">Success</button>
-                <button type="button" class="btn btn-danger">Danger</button>
+            <div
+              class="color-box bg-secondary-demo"
+              data-text-light="Secondary: #6F6F6F"
+              data-text-dark="Secondary: #6F6F6F"
+            >
+              Secondary: #6f6f6f
             </div>
-        </div>
+          </div>
 
-        <div class="row mt-4">
-            <div class="col-md-6">
-                <h3>Form Elements</h3>
-                <form>
-                    <div class="mb-3">
-                        <label for="exampleInput" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInput" placeholder="name@example.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleSelect" class="form-label">Example select</label>
-                        <select class="form-select" id="exampleSelect">
-                            <option>Choose...</option>
-                            <option>Option 1</option>
-                            <option>Option 2</option>
-                        </select>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Default checkbox
-                        </label>
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6">
-                <h3>Cards</h3>
-                <div class="card">
-                    <div class="card-header">
-                        Featured
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card demonstrates the MeKo theme styling with proper spacing and colors.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </div>
+          <div class="col-md-6">
+            <h3>Typography</h3>
+            <h1>Heading 1 (Open Sans)</h1>
+            <h2>Heading 2 (Open Sans)</h2>
+            <p>
+              This is a paragraph using the Open Sans font family. The custom
+              theme ensures consistent typography across all elements.
+            </p>
+            <p>
+              <strong>Bold text</strong> and <em>italic text</em> maintain the
+              Open Sans styling.
+            </p>
+          </div>
         </div>
+      </div>
 
-        <div class="row mt-4">
-            <div class="col-12">
-                <h3>Alerts</h3>
-                <div class="alert alert-primary" role="alert">
-                    A primary alert using the MeKo brand color!
-                </div>
-                <div class="alert alert-success" role="alert">
-                    A success alert with proper styling.
-                </div>
-            </div>
+      <div class="row mt-5">
+        <div class="col-12">
+          <h3>Buttons</h3>
+          <button type="button" class="btn btn-primary me-2">
+            Primary Button
+          </button>
+          <button type="button" class="btn btn-outline-primary me-2">
+            Outline Primary
+          </button>
+          <button type="button" class="btn btn-secondary me-2">
+            Secondary
+          </button>
+          <button type="button" class="btn btn-success me-2">Success</button>
+          <button type="button" class="btn btn-danger">Danger</button>
         </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-md-6">
+          <h3>Form Elements</h3>
+          <form>
+            <div class="mb-3">
+              <label for="exampleInput" class="form-label">Email address</label>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInput"
+                placeholder="name@example.com"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleSelect" class="form-label"
+                >Example select</label
+              >
+              <select class="form-select" id="exampleSelect">
+                <option>Choose...</option>
+                <option>Option 1</option>
+                <option>Option 2</option>
+              </select>
+            </div>
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="flexCheckDefault"
+              />
+              <label class="form-check-label" for="flexCheckDefault"
+                >Default checkbox</label
+              >
+            </div>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <h3>Cards</h3>
+          <div class="card">
+            <div class="card-header">Featured</div>
+            <div class="card-body">
+              <h5 class="card-title">Card title</h5>
+              <p class="card-text">
+                This card demonstrates the MeKo theme styling with proper
+                spacing and colors.
+              </p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12">
+          <h3>Alerts</h3>
+          <div class="alert alert-primary" role="alert">
+            A primary alert using the MeKo brand color!
+          </div>
+          <div class="alert alert-success" role="alert">
+            A success alert with proper styling.
+          </div>
+        </div>
+      </div>
     </main>
 
     <footer class="bg-light py-4 mt-5">
-        <div class="container text-center">
-            <p class="text-muted">&copy; 2024 MeKo Bootstrap Theme Demo. Built with Bootstrap 5 and custom MeKo styling.</p>
-        </div>
+      <div class="container text-center">
+        <p class="text-muted">
+          &copy; 2024 MeKo Bootstrap Theme Demo. Built with Bootstrap 5 and
+          custom MeKo styling.
+        </p>
+      </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-bs-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            const icon = document.getElementById('theme-icon');
-            
-            html.setAttribute('data-bs-theme', newTheme);
-            icon.textContent = newTheme === 'light' ? '🌙' : '☀️';
-            
-            // Store preference
-            localStorage.setItem('theme', newTheme);
-        }
+      function setTextsForTheme(theme) {
+        document
+          .querySelectorAll("[data-text-light],[data-text-dark]")
+          .forEach((el) => {
+            const next =
+              theme === "dark" ? el.dataset.textDark : el.dataset.textLight;
+            if (typeof next === "string") el.textContent = next;
+          });
+      }
 
-        // Load saved theme
-        document.addEventListener('DOMContentLoaded', function() {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            const html = document.documentElement;
-            const icon = document.getElementById('theme-icon');
-            
-            html.setAttribute('data-bs-theme', savedTheme);
-            icon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
-        });
+      function applyTheme(theme) {
+        const html = document.documentElement;
+        const icon = document.getElementById("theme-icon");
+        html.setAttribute("data-bs-theme", theme);
+        icon.textContent = theme === "light" ? "🌙" : "☀️";
+        setTextsForTheme(theme);
+        localStorage.setItem("theme", theme);
+      }
+
+      function toggleTheme() {
+        const current =
+          document.documentElement.getAttribute("data-bs-theme") || "light";
+        applyTheme(current === "light" ? "dark" : "light");
+      }
+
+      // Initial laden
+      document.addEventListener("DOMContentLoaded", function () {
+        const saved = localStorage.getItem("theme") || "light";
+        applyTheme(saved);
+      });
     </script>
-</body>
+  </body>
 </html>
