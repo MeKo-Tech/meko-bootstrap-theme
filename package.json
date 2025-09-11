@@ -1,7 +1,7 @@
 {
   "name": "@meko/bootstrap-theme",
   "version": "1.0.1",
-  "description": "MeKo Bootstrap 5 theme (Primary #00afaa, Open Sans). Variant A (full build) & Variant B (variables-only).",
+  "description": "MeKo Bootstrap 5 theme (Primary #00aaa7, Open Sans). Variant A (full build) & Variant B (variables-only).",
   "license": "MIT",
   "files": [
     "dist",

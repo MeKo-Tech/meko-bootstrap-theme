@@ -1,12 +1,12 @@
 # MeKo Bootstrap Theme
 
-A custom Bootstrap 5 theme featuring MeKo branding with primary color `#00afaa` and Open Sans typography. Includes light and dark theme variants.
+A custom Bootstrap 5 theme featuring MeKo branding with primary color `#00aaa7` and Open Sans typography. Includes light and dark theme variants.
 
 🔗 **[View Live Demo](https://meko-tech.github.io/meko-bootstrap-theme/)**
 
 ## Features
 
-- ✅ **Custom MeKo Colors**: Primary `#00afaa`, Secondary `#595959`
+- ✅ **Custom MeKo Colors**: Primary `#00aaa7`, Secondary `#595959`
 - ✅ **Open Sans Typography**: Complete font family integration
 - ✅ **Light/Dark Themes**: Full Bootstrap dark mode support
 - ✅ **Content Hashing**: CDN-optimized with cache busting
