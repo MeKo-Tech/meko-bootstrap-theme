@@ -7,7 +7,7 @@ on:
 
 jobs:
   deploy:
-    runs-on: [ewws-arc-ci-onprem]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
