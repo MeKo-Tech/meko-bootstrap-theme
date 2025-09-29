@@ -3,13 +3,13 @@ name: Build and Release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
   workflow_dispatch:
 
 jobs:
   build-and-release:
-    runs-on: ubuntu-latest
-    
+    runs-on: [ewws-arc-ci-onprem]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -40,12 +40,12 @@ jobs:
           release_name: Release v${{ steps.package-version.outputs.version }}
           body: |
             ## MeKo Bootstrap Theme v${{ steps.package-version.outputs.version }}
-            
+
             ### Assets
             - `bootstrap-meko.min.css` - Minified CSS theme
             - `bootstrap-meko.css` - Unminified CSS theme
             - Fonts and assets included
-            
+
             ### Usage
             ```html
             <link rel="stylesheet" href="https://github.com/MeKo-Tech/meko-bootstrap-theme/releases/download/v${{ steps.package-version.outputs.version }}/bootstrap-meko.min.css">
