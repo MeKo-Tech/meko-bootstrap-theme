@@ -50,6 +50,6 @@
     "postcss-cli": "^12.0.0",
     "sass": "^1.105.1",
     "sass-embedded": "^1.105.1",
-    "sass-loader": "^16.0.5"
+    "sass-loader": "^17.0.1"
   }
 }
