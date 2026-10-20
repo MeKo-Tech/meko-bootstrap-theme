@@ -48,6 +48,9 @@ jobs:
         uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           tag_name: v${{ steps.package-version.outputs.version }}
+          # create-release@v1 tagged context.sha when the tag did not exist yet;
+          # without this a workflow_dispatch run would tag the default branch.
+          target_commitish: ${{ github.sha }}
           name: Release v${{ steps.package-version.outputs.version }}
           body: |
             ## MeKo Bootstrap Theme v${{ steps.package-version.outputs.version }}
