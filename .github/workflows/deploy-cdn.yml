@@ -5,9 +5,18 @@ on:
     branches: [main]
   workflow_dispatch:
 
+# Uploads queue instead of overlapping or cancelling each other, so a newer
+# push never interrupts a running upload halfway through the bucket.
+concurrency:
+  group: deploy-meko-bootstrap-theme-cdn
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # Runs queue now, so a hung upload must not block the group for
+    # GitHub's 6 h default.
+    timeout-minutes: 30
 
     steps:
       - name: Checkout code
