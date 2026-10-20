@@ -10,12 +10,15 @@ jobs:
   build-and-release:
     runs-on: [ewws-arc-ci-onprem]
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - name: Setup Node.js
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: "24"
           cache: npm
@@ -30,14 +33,25 @@ jobs:
         id: package-version
         run: echo "version=$(node -p "require('./package.json').version")" >> $GITHUB_OUTPUT
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create distribution archive
+        run: |
+          cd dist
+          tar -czf ../meko-bootstrap-theme-v${{ steps.package-version.outputs.version }}.tar.gz *
+          cd ..
+          zip -r meko-bootstrap-theme-v${{ steps.package-version.outputs.version }}.zip dist/
+
+      # Replaces the archived actions/create-release@v1 and
+      # actions/upload-release-asset@v1. Tag, name, body and flags are the same
+      # as before; every asset is uploaded under its file name, which already
+      # matched the old asset_name of each upload step.
+      - name: Create release and upload assets
+        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
         with:
           tag_name: v${{ steps.package-version.outputs.version }}
-          release_name: Release v${{ steps.package-version.outputs.version }}
+          # create-release@v1 tagged context.sha when the tag did not exist yet;
+          # without this a workflow_dispatch run would tag the default branch.
+          target_commitish: ${{ github.sha }}
+          name: Release v${{ steps.package-version.outputs.version }}
           body: |
             ## MeKo Bootstrap Theme v${{ steps.package-version.outputs.version }}
 
@@ -52,50 +66,9 @@ jobs:
             ```
           draft: false
           prerelease: false
-
-      - name: Create distribution archive
-        run: |
-          cd dist
-          tar -czf ../meko-bootstrap-theme-v${{ steps.package-version.outputs.version }}.tar.gz *
-          cd ..
-          zip -r meko-bootstrap-theme-v${{ steps.package-version.outputs.version }}.zip dist/
-
-      - name: Upload Release Assets
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./meko-bootstrap-theme-v${{ steps.package-version.outputs.version }}.tar.gz
-          asset_name: meko-bootstrap-theme-v${{ steps.package-version.outputs.version }}.tar.gz
-          asset_content_type: application/gzip
-
-      - name: Upload Release Assets (ZIP)
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./meko-bootstrap-theme-v${{ steps.package-version.outputs.version }}.zip
-          asset_name: meko-bootstrap-theme-v${{ steps.package-version.outputs.version }}.zip
-          asset_content_type: application/zip
-
-      - name: Upload minified CSS
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/bootstrap-meko.min.css
-          asset_name: bootstrap-meko.min.css
-          asset_content_type: text/css
-
-      - name: Upload unminified CSS
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/bootstrap-meko.css
-          asset_name: bootstrap-meko.css
-          asset_content_type: text/css
+          fail_on_unmatched_files: true
+          files: |
+            meko-bootstrap-theme-v${{ steps.package-version.outputs.version }}.tar.gz
+            meko-bootstrap-theme-v${{ steps.package-version.outputs.version }}.zip
+            dist/bootstrap-meko.min.css
+            dist/bootstrap-meko.css
