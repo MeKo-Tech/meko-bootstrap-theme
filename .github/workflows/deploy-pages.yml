@@ -16,7 +16,12 @@ concurrency:
 
 jobs:
   build:
-    runs-on: [ewws-arc-ci-onprem]
+    # GitHub-hosted like deploy-cdn.yml, which runs the same npm build: the
+    # ewws-arc-ci-onprem scale set does not serve this repository, so jobs
+    # there sat queued until GitHub cancelled them after 24 h (every run
+    # since 2025-09-29).
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - name: Checkout
