@@ -8,7 +8,10 @@ on:
 
 jobs:
   build-and-release:
-    runs-on: [ewws-arc-ci-onprem]
+    # GitHub-hosted for the same reason as deploy-pages.yml: the
+    # ewws-arc-ci-onprem scale set does not serve this repository.
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     permissions:
       contents: write
