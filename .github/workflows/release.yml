@@ -48,7 +48,7 @@ jobs:
       # as before; every asset is uploaded under its file name, which already
       # matched the old asset_name of each upload step.
       - name: Create release and upload assets
-        uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
+        uses: softprops/action-gh-release@8a0cd651e5b2365bd640854a3fa5dfc70e4875f3 # v3.0.4
         with:
           tag_name: v${{ steps.package-version.outputs.version }}
           # create-release@v1 tagged context.sha when the tag did not exist yet;
